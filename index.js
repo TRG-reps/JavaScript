@@ -1,65 +1,76 @@
-// Задача 1 - Приветствие 5 раз
-// С помощью цикла for выведи на экран 5 раз фразу - Привет, мир!
+// Задача 1 - Приветствие (база)
+// Напиши функцию `sayHello`, которая принимает имя человека и выводит в консоль приветствие.
+// Пример: sayHello("Аня") → "Привет, Аня!"
 
-for (let i = 1; i <= 5; i++) {
-  console.log("Привет, мир!");
+function sayHello (name) {
+  console.log (`Привет, ${name}!`)
+}
+sayHello("Аня") 
+
+// Задача 2 - Квадрат числа + return
+// Напиши функцию `square(num)`, которая возвращает квадрат числа.
+// Затем вызови эту функцию 3 раза с разными числами и сохрани результат в переменные.
+
+function square(num) {
+  return num * num
 }
 
-// Задача 2 - Числа от 1 до 10
-// Выведи на экран числа от 1 до 10. Каждое число — на новой строке.
-// Пример вывода:
-// 1
-// 2
-// 3
-// ...10
+const a = square(2);
+const b = square(4);
+const c = square(323)
 
-let x = 1;
+console.log(a,b,c) 
 
-while (x <= 10) {
-  console.log(x);
-  x++;
+// Задача 3 - Сравнение чисел
+// Напиши функцию `isBigger(a, b)` 
+// Она должна возвращать true, если a > b, иначе false.
+// Пример: isBigger(10, 5) → true
+
+isBigger = (a, b) => a > b;
+
+console.log(isBigger(1, 2))
+
+// Задача 4 - Колбэк внутри
+// Напиши функцию `doTwice(callback)`, которая вызывает переданную ей функцию дважды
+function sayHi() {
+  console.log("Привет!");
+}
+function doTwice(callback) {
+    callback();
+    callback();  
+}
+doTwice(sayHi);
+// → Привет!
+// → Привет!
+
+// Задача 5 - Комбинация функций
+// Создай две функции:
+// 1. `formatName(name)` — возвращает строку в виде "Пользователь: <имя>"
+// 2. `greet(name)` — вызывает `formatName(name)` и выводит результат в консоль с текстом: "Добро пожаловать, Пользователь: <имя>"
+// Пример вызова: greet("Лена") → "Добро пожаловать, Пользователь: Лена"
+
+function formatName(naame) {
+  return `Пользователь: ${naame}`
 }
 
-// Задача 3 - Четные числа от 2 до 20
-// Выведи только четные числа от 2 до 20 включительно.
-// Пример вывода:
-// 2,4,6...20
-
-let y = 1;
-
-while (y <= 20) {
-  if (y % 2 === 0) {
-    console.log(y);
+function greet (naame) {
+  return console.log(`Добро пожаловать, ${formatName (naame)}`)
   }
-  y++;
+
+  greet("Ruslan")
+
+// Задача 6 - Напиши функцию `createMultiplier(multiplier)`, которая возвращает новую функцию.
+// Эта новая функция createMultiplier должна принимать число и умножать его на multiplier.
+// Пример:
+// const double = createMultiplier(2);
+// console.log(double(5)); // → 10
+// const triple = createMultiplier(3);
+// console.log(triple(4)); // → 12
+
+
+function createMultiplier (multiplier) {
+  return function (num) {
+    return num * multiplier
+  }
 }
 
-//или
-
-let y = 2;
-
-while (y <= 20) {
-  console.log(y);
-  y += 2;
-}
-
-// Задача 4 - Сумма чисел от 1 до 100
-// Вычисли сумму всех чисел от 1 до 100 и выведи результат.
-// Пример вывода: Сумма от 1 до 100 = 5050
-
-let result = 0;
-for (let i = 1; i <= 100; i++) {
-  result += i;
-}
-console.log("Сумма от 1 до 100 = " + result);
-
-//или
-
-let i = 1;
-let sum = 0;
-
-while (i <= 100) {
-  sum += i;
-  i++;
-}
-console.log("Сумма от 1 до 100 = " + sum);
