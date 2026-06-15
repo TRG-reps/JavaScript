@@ -1,76 +1,180 @@
-// Задача 1 - Приветствие (база)
-// Напиши функцию `sayHello`, которая принимает имя человека и выводит в консоль приветствие.
-// Пример: sayHello("Аня") → "Привет, Аня!"
+// Задание 1: "Карточка пользователя"
+// Создай объект `user`, у которого будут свойства:
+// - `name` (строка)
+// - `age` (число)
+// - `isAdmin` (булевое значение)
+// Выведи в консоль:
+// - имя пользователя
+// - его возраст
+// - является ли он администратором
 
-function sayHello (name) {
-  console.log (`Привет, ${name}!`)
-}
-sayHello("Аня") 
-
-// Задача 2 - Квадрат числа + return
-// Напиши функцию `square(num)`, которая возвращает квадрат числа.
-// Затем вызови эту функцию 3 раза с разными числами и сохрани результат в переменные.
-
-function square(num) {
-  return num * num
-}
-
-const a = square(2);
-const b = square(4);
-const c = square(323)
-
-console.log(a,b,c) 
-
-// Задача 3 - Сравнение чисел
-// Напиши функцию `isBigger(a, b)` 
-// Она должна возвращать true, если a > b, иначе false.
-// Пример: isBigger(10, 5) → true
-
-isBigger = (a, b) => a > b;
-
-console.log(isBigger(1, 2))
-
-// Задача 4 - Колбэк внутри
-// Напиши функцию `doTwice(callback)`, которая вызывает переданную ей функцию дважды
-function sayHi() {
-  console.log("Привет!");
-}
-function doTwice(callback) {
-    callback();
-    callback();  
-}
-doTwice(sayHi);
-// → Привет!
-// → Привет!
-
-// Задача 5 - Комбинация функций
-// Создай две функции:
-// 1. `formatName(name)` — возвращает строку в виде "Пользователь: <имя>"
-// 2. `greet(name)` — вызывает `formatName(name)` и выводит результат в консоль с текстом: "Добро пожаловать, Пользователь: <имя>"
-// Пример вызова: greet("Лена") → "Добро пожаловать, Пользователь: Лена"
-
-function formatName(naame) {
-  return `Пользователь: ${naame}`
+const user = {
+  name: "Anna",
+  age: 20,
+  isAdmin: true
 }
 
-function greet (naame) {
-  return console.log(`Добро пожаловать, ${formatName (naame)}`)
+console.log (user.name, user.age, user.isAdmin) 
+
+// Задание 2: "Добавление и изменение"
+// 1. Создай объект `car` с маркой и годом выпуска.
+// 2. Добавь к нему свойство `color`.
+// 3. Измени год выпуска.
+// 4. Выведи результат в консоль.
+
+const car = {
+  brand: "Toyota",
+  year: 2024
+}
+
+car.color = "black";
+car.year = 2026
+
+console.log (car)
+
+// Задание 3: "Вложенные объекты"
+// Создай объект `order`, у которого:
+// - есть вложенный объект `customer` с полями `name` и `phone`
+// - есть вложенный объект `shipping` с полями `city` и `zip`
+// Выведи в консоль поля customer и shipping:
+
+const order = { 
+  customer : {
+    name: "Anna",
+    phone: 7777
+  },
+  shipping : {
+    city: "London",
+    zip: 5222
   }
+}
 
-  greet("Ruslan")
+console.log (order.customer, order.shipping)
 
-// Задача 6 - Напиши функцию `createMultiplier(multiplier)`, которая возвращает новую функцию.
-// Эта новая функция createMultiplier должна принимать число и умножать его на multiplier.
+// Задание 4: "Объект как база данных"
+// 1. Создай объект `products`, где ключами будут названия товаров, а значениями — цены.
+// 2. Получи цену конкретного товара по ключу.
+// 3. Добавь новый товар и выведи обновлённый объект.
+
 // Пример:
-// const double = createMultiplier(2);
-// console.log(double(5)); // → 10
-// const triple = createMultiplier(3);
-// console.log(triple(4)); // → 12
+// В консоли - "Товар: book, цена - 500"
+// В консоли - "Товар: pensil, цена - 50" 
 
 
-function createMultiplier (multiplier) {
-  return function (num) {
-    return num * multiplier
+const products = {
+book: 500,
+pencil: 50,
+pen: 100,
+workbook: 300
+}
+
+console.log (`Товар: book, цена -  ${products.book}`)
+console.log (`Товар: pencil, цена -  ${products.pencil}`)
+
+
+// Задание 5 "Реальный заказ"
+// Создай объект `fullOrder`, в котором:
+// - `buyer`: содержет поля - name, email, phone
+// - `shipping`: содержет поля - city, adres, shipMethod
+// - `payment`: содержет поля - paymentMethod, status
+// Выведи в консоль объект, после чего измени значение каждого поля и снова выведи в консоль.
+
+const fullOrder = {
+  buyer : {
+    name: "Kolya",
+    email: "kolya@gmail.com",
+    phone: "7777-8888"
+  },
+  shipping : {
+    city: "Oslo",
+    adress: "Highway 65",
+    shipMethod: "airplane"
+  },
+  payment : {
+    paymentMethod: "credit card",
+    status: "inProgress"
   }
 }
 
+
+console.log(fullOrder)
+
+fullOrder.buyer.name = "Vasiliy"
+fullOrder.buyer.email = "vasya@gmail.com"
+fullOrder.buyer.phone = "1111-2222"
+
+fullOrder.shipping.city = "Toronto"
+fullOrder.shipping.adress = "Waterfall Str 6"
+fullOrder.shipping.shipMethod = "truck"
+
+fullOrder.payment.status = "delivered"
+fullOrder.payment.paymentMethod = "bank"
+
+console.log(fullOrder)
+
+// Задание 6: "Метод приветствия"
+// Создай объект `person`, у которого будут свойства:
+// - `name`
+// - `age`
+// Добавь метод `greet(message)`:
+// - принимает строку message
+// - выводит в консоль: "<message>, меня зовут <name>"
+
+const person = {
+  name : "John",
+  age : 19 ,
+
+greet(message) {
+  console.log(`${message}, меня зовут ${this.name}`)
+}
+}
+
+person.greet("Привет")
+
+ 
+// Задание 7: "Подсчёт стоимости корзины"
+// Создай объект `cart`, у которого:
+// - есть свойство `items` (массив чисел — цены товаров)
+// Добавь метод `getTotal(discount)`:
+// - принимает число discount (скидка в процентах)
+// - считает сумму всех товаров
+// - применяет скидку
+// - возвращает итоговую сумму
+
+const cart = {
+  items: [40, 30, 65, 94],
+
+  getTotal(discount) {
+    let total = 0;
+    
+    for (const price of this.items) {
+     total += price 
+    }
+    let finalPrice = total - total * discount / 100;
+    return finalPrice
+}
+}
+console.log (cart.getTotal(50))
+
+
+// Задание 8: "Обновление данных пользователя"
+// Создай объект `profile`, у которого:
+// - `username`
+// - `email`
+// Добавь метод `update(field, value)`:
+// - принимает название поля и новое значение
+// - изменяет соответствующее поле объекта
+// - выведи объект в консоль до и после изменения
+
+const profile = {
+  username: "Agent007",
+  email: "agent007@gmail.com",
+
+  update(field, value) {
+    return this[field] = value
+  }
+}
+
+console.log(profile);
+
+console.log (profile.update("username","Agent008"))
