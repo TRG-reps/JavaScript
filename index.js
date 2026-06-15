@@ -171,10 +171,12 @@ const profile = {
   email: "agent007@gmail.com",
 
   update(field, value) {
-    return this[field] = value
+  this[field] = value
   }
 }
 
 console.log(profile);
 
-console.log (profile.update("username","Agent008"))
+profile.update("username","Agent008")
+
+console.log(profile)
