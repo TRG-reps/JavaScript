@@ -1,230 +1,373 @@
 
-// Задача 1 - Объединить клиентов и добавить id
-const customers1 = [
-  { name: 'John', city: 'London' },
-  { name: 'Maria', city: 'Berlin' }
+
+// Задание 1: "Назначить ID пользователям"
+// Есть массив users:
+const users = [
+  { name: 'Alex' },
+  { name: 'John' },
+  { name: 'Kate' }
 ];
 
-const customers2 = [
-  { name: 'Peter', city: 'Paris' },
-  { name: 'Anna', city: 'Madrid' }
+// Создай функцию `addIds(arr)`:
+// - с помощью forEach добавляет каждому объекту поле id (начиная с 1)
+// - возвращает обновлённый массив
+// Сохрани результат в переменную и выведи в консоль
+
+
+
+const users = [
+  { name: 'Alex' },
+  { name: 'John' },
+  { name: 'Kate' }
 ];
 
-// 👉 Получи результат:
-[
-  { name: 'John', city: 'London', id: 101 },
-  { name: 'Maria', city: 'Berlin', id: 102 },
-  { name: 'Peter', city: 'Paris', id: 103 },
-  { name: 'Anna', city: 'Madrid', id: 104 }
+
+
+ const addIds = (arr) => {arr.forEach((user,index) => (user.id = index +1))
+return arr}
+
+
+
+const result = addIds(users)
+console.log(result)
+
+
+
+// Задание 2: "Добавить статус онлайн"
+// Есть массив users:
+const usersOnline = [
+  { name: 'Alex', lastVisit: 2 },
+  { name: 'John', lastVisit: 10 },
+  { name: 'Kate', lastVisit: 1 }
+];
+
+// Создай функцию `setOnlineStatus(arr)`:
+// - если lastVisit <= 3 → online = true
+// - иначе online = false
+// - добавь это поле каждому объекту через forEach
+// - верни массив
+// Сохрани результат в переменную и выведи
+
+
+const usersOnline = [
+  { name: 'Alex', lastVisit: 2 },
+  { name: 'John', lastVisit: 10 },
+  { name: 'Kate', lastVisit: 1 }
 ]
 
-// Для объеденения массивов ты можешь использовать конструкцию с тремя точками. Пример ниже:
-const newArrayTest = [...customers1, ...customers2]
+function addQ (arr) {
+  arr.forEach((user) => user.lastVisit <= 3 ? user.online = true : user.online = false)
+  return arr
+}
+
+console.log(addQ(usersOnline))
 
 
-const customers1 = [
-  { name: 'John', city: 'London' },
-  { name: 'Maria', city: 'Berlin' }
+// Задание 3: "Активные пользователи с телефонами"
+// Есть массив:
+const usersData = [
+  { name: 'Alex', isActive: true, phone: '123' },
+  { name: 'John', isActive: false, phone: null },
+  { name: 'Kate', isActive: true, phone: '456' }
 ];
 
-const customers2 = [
-  { name: 'Peter', city: 'Paris' },
-  { name: 'Anna', city: 'Madrid' }
+// Создай функцию `getValidUsers(arr)`:
+// - возвращает только тех, у кого isActive = true и есть phone
+// Сохрани результат в переменную и выведи
+
+
+
+const usersData = [
+  { name: 'Alex', isActive: true, phone: '123' },
+  { name: 'John', isActive: false, phone: null },
+  { name: 'Kate', isActive: true, phone: '456' }
+]
+
+const getValidUsers = (arr) => arr.filter((user) => user.isActive && user.phone)
+
+console.log(getValidUsers(usersData))
+
+
+
+
+// Задание 4: "Дорогие и доступные товары"
+// Есть массив:
+const shopItems = [
+  { title: 'Phone', price: 800, inStock: true },
+  { title: 'TV', price: 1500, inStock: false },
+  { title: 'Laptop', price: 1200, inStock: true }
 ];
 
+// Создай функцию `getAvailableExpensive(arr)`:
+// - верни товары дороже 1000 и которые есть в наличии
+// Сохрани результат и выведи
 
-const customers = [...customers1, ...customers2]
 
-const result = customers.map((customer, index) => ({
-  ...customer,
-  id: index + 101
+
+
+const shopItems = [
+  { title: 'Phone', price: 800, inStock: true },
+  { title: 'TV', price: 1500, inStock: false },
+  { title: 'Laptop', price: 1200, inStock: true }
+]
+
+
+const getAvailableExpensive = (arr) => arr.filter((item) => item.price > 1000 && item.inStock)
+
+console.log(getAvailableExpensive(shopItems))
+
+
+
+
+// Задание 5: "Добавить описание пользователя"
+// Есть массив:
+const people = [
+  { name: 'Alex', age: 20 },
+  { name: 'John', age: 30 }
+];
+
+// Создай функцию `addDescription(arr)`:
+// - верни новый массив
+// - добавь каждому объекту поле description: "Имя: Alex, Возраст: 20"
+// Сохрани результат и выведи
+
+
+
+const people = [
+  { name: 'Alex', age: 20 },
+  { name: 'John', age: 30 }
+]
+
+const addDescription = (arr) => arr.map((user) => ({
+  ...user,
+  description: `Имя: ${user.name}, Возраст: ${user.age}`
 }))
-console.log(result)
 
-// Задача 2 - Получить e-mail активных заказов
-const orders = [
-  { id: 1, email: 'user1@mail.com', isActive: true },
-  { id: 2, email: 'user2@mail.com', isActive: false },
-  { id: 3, email: 'user3@mail.com', isActive: true }
+console.log(addDescription(people))
+
+
+
+// Задание 6: "Формирование статуса заказа"
+// Есть массив:
+const ordersList = [
+  { id: 1, total: 500 },
+  { id: 2, total: 2000 }
 ];
 
-// 👉 Получи результат:
-['user1@mail.com', 'user3@mail.com']
+// Создай функцию `addStatus(arr)`:
+// - если total > 1000 → status = "VIP"
+// - иначе status = "обычный"
+// - верни новый массив объектов
+// Сохрани результат и выведи
 
-const orders = [
-  { id: 1, email: 'user1@mail.com', isActive: true },
-  { id: 2, email: 'user2@mail.com', isActive: false },
-  { id: 3, email: 'user3@mail.com', isActive: true }
+
+
+const ordersList = [
+  { id: 1, total: 500 },
+  { id: 2, total: 2000 }
+]
+
+const addStatus = (arr) => arr.map((order) => ({
+  ...order,
+  status: order.total > 1000 ? 'VIP' : 'обычный'
+}))
+
+console.log(addStatus(ordersList))
+
+
+
+// Задание 7: "Проверка ролей"
+// Есть массив:
+const roles = ['user', 'admin', 'moderator'];
+
+const usersRoles = [
+  { name: 'Alex', role: 'admin' },
+  { name: 'John', role: 'guest' }
 ];
 
+// Создай функцию `checkRoles(arr, roles)`:
+// - добавь каждому пользователю поле hasAccess (true/false)
+// - true если его role есть в массиве roles
+// - верни массив
+// Сохрани результат и выведи
 
 
-const result = orders
-.filter((order) => order.isActive)
-.map((order) => order.email)
 
-console.log(result)
+const roles = ['user', 'admin', 'moderator'];
 
-// Задача 3: Сформировать описание товаров
-const products = [
-  { title: 'Laptop', price: 1000 },
-  { title: 'Phone', price: 600 }
-];
-
-// 👉 Получи результат:
-[
-  'Товар: Laptop — Цена: 1000',
-  'Товар: Phone — Цена: 600'
+const usersRoles = [
+  { name: 'Alex', role: 'admin' },
+  { name: 'John', role: 'guest' }
 ]
 
 
+const checkRoles = (arr, roles) => arr.map((user) => ({
+  ...user,
+  hasAccess: roles.includes(user.role)
+}))
 
-const products = [
-  { title: 'Laptop', price: 1000 },
-  { title: 'Phone', price: 600 }
+console.log(checkRoles(usersRoles, roles))
+
+
+
+// Задание 8: "Позиция категории"
+// Есть массив:
+const categories = ['tech', 'food', 'books'];
+
+const productsData = [
+  { title: 'Laptop', category: 'tech' },
+  { title: 'Pizza', category: 'food' }
 ];
 
-const result = products.map((product) => (`Товар: ${product.title}  Цена — ${product.price}`))
-console.log(result)
+// Создай функцию `addCategoryIndex(arr, categories)`:
+// - добавь каждому объекту поле categoryIndex (через indexOf)
+// - верни массив
+// Сохрани результат и выведи
 
-// Задача 4: Отметить клиентов с высоким балансом
-const clients = [
-  { name: 'Lena', balance: 900 },
-  { name: 'Dima', balance: 2000 },
-  { name: 'Max', balance: 1500 }
+
+
+const categories = ['tech', 'food', 'books'];
+
+const productsData = [
+  { title: 'Laptop', category: 'tech' },
+  { title: 'Pizza', category: 'food' },
 ];
 
-// ❗Добавь каждому клиенту новое свойство `isVIP`:
-// true — если баланс больше или равен 1500
-// false — если меньше.
+const addCategoryIndex = (arr, categories) => arr.map((product) => ({
+  ...product,
+  categoryIndex: categories.indexOf(product.category)
+}) )
+
+console.log(addCategoryIndex(productsData, categories))
 
 
-const clients = [
-  { name: 'Lena', balance: 900 },
-  { name: 'Dima', balance: 2000 },
-  { name: 'Max', balance: 1500 }
+
+// Задание 9: "Найти и отметить пользователя"
+// Есть массив:
+const usersList = [
+  { name: 'Alex' },
+  { name: 'John' },
+  { name: 'Kate' }
+];
+
+// Создай функцию `markUser(arr, name)`:
+// - найди индекс пользователя по имени (findIndex)
+// - добавь найденному пользователю поле selected = true
+// - верни массив
+// Сохрани результат и выведи
+
+
+const usersList = [
+  { name: 'Alex' },
+  { name: 'John' },
+  { name: 'Kate' }
 ]
 
-const vip = clients.map((client) => ({
-  ...client,
-  isVip: client.balance >= 1500 
+
+const markUser = (arr, name) => {
+  const index = arr.findIndex((user) => user.name === name)
+  arr[index].selected = true
+  return arr
+}
+
+console.log(markUser(usersList, 'Kate'))
+*/
+/*
+// Задание 10: "Проверка на ошибки"
+// Есть массив:
+const logs = [
+  { message: 'ok', isError: false },
+  { message: 'fail', isError: true }
+];
+
+// Создай функцию `checkErrors(arr)`:
+// - если есть хотя бы одна ошибка:
+//   → добавь каждому объекту поле hasGlobalError = true
+// - иначе false
+// - верни массив
+// Сохрани результат и выведи
+
+
+
+
+const logs = [
+  { message: 'ok', isError: false },
+  { message: 'fail', isError: true }
+]
+
+
+const checkErrors = (arr) => arr.map((user) => ({
+  ...user,
+  hasGlobalError: arr.some((user) => user.isError )
+  
 })) 
 
-console.log(vip)
+console.log(checkErrors(logs))
 
-// Задача 5: Названия товаров в наличии и дешевле 100
-const items = [
-  { title: 'Backpack', inStock: true, price: 40 },
-  { title: 'Shoes', inStock: false, price: 80 },
-  { title: 'Watch', inStock: true, price: 120 }
+
+
+// Задание 11: "Проверка завершения задач"
+// Есть массив:
+const tasksList = [
+  { title: 'A', done: true },
+  { title: 'B', done: true }
 ];
 
-// ❗Найди только те товары, которые:
-// 1. есть в наличии (`inStock === true`)
-// 2. стоят меньше 100
-// Верни массив, содержащий только названия таких товаров.
+// Создай функцию `markCompletion(arr)`:
+// - если все задачи выполнены:
+//   → добавь каждому completedAll = true
+// - иначе false
+// - верни массив
+// Сохрани результат и выведи
 
 
-// 👉 Ожидаемый результат:
-['Backpack']
 
-const items = [
-  { title: 'Backpack', inStock: true, price: 40 },
-  { title: 'Shoes', inStock: false, price: 80 },
-  { title: 'Watch', inStock: true, price: 120 }
+
+const tasksList = [
+  { title: 'A', done: true },
+  { title: 'B', done: true }
 ]
 
-const titles = items
-.filter((item) => item.inStock && item.price < 100)
-.map((item) => item.title)
-
-console.log(titles)
-
-
-//  Задача 6: Сгруппировать заказы по статусу
-const orders = [
-  { id: 1, status: 'pending' },
-  { id: 2, status: 'delivered' },
-  { id: 3, status: 'pending' },
-  { id: 4, status: 'cancelled' },
-  { id: 5, status: 'delivered' }
-];
-
-// ❗Раздели заказы по статусу в отдельные массивы внутри объекта.
-
-
-// 👉 Ожидаемый результат:
-{
-  pending: [
-    { id: 1, status: 'pending' },
-    { id: 3, status: 'pending' }
-  ],
-  delivered: [
-    { id: 2, status: 'delivered' },
-    { id: 5, status: 'delivered' }
-  ],
-  cancelled: [
-    { id: 4, status: 'cancelled' }
-  ]
+function markCompletion(arr) {
+  const isOk = arr.every((task) => task.done)
+  return arr.map((task) => ({
+    ...task,
+    completedAll: isOk
+  }))
 }
 
+console.log(markCompletion(tasksList))
 
-const orders = [
-  { id: 1, status: 'pending' },
-  { id: 2, status: 'delivered' },
-  { id: 3, status: 'pending' },
-  { id: 4, status: 'cancelled' },
-  { id: 5, status: 'delivered' }
+
+
+// Задание 12: "Сборка объекта пользователей"
+// Есть массив:
+const usersArr = [
+  { id: 1, name: 'Alex' },
+  { id: 2, name: 'John' }
+];
+
+// Создай функцию `toObject(arr)`:
+// - преобразуй массив в объект вида:
+// { 1: { id: 1, name: 'Alex' }, 2: { ... } }
+// - используй reduce
+// Сохрани результат и выведи
+
+
+const usersArr = [
+  { id: 1, name: 'Alex' },
+  { id: 2, name: 'John' }
 ]
 
-const group = orders.reduce((acc,order) => {
-   if (!acc[order.status]) {
-    acc[order.status] = []
-   }
-   acc[order.status].push(order)
-   return acc
+const toObject = (arr) => arr.reduce((acc, user) => {
+  acc[user.id] = user
+
+  return acc
+
+
 }, {})
 
-console.log(group)
-
-const products = [
-  { name: 'Laptop', category: 'electronics' },
-  { name: 'Shirt', category: 'clothing' },
-  { name: 'Phone', category: 'electronics' },
-  { name: 'Pants', category: 'clothing' },
-  { name: 'Blender', category: 'home' }
-];
-
-// ❗Верни объект, в котором ключ — категория,
-// а значение — количество товаров в ней.
-
-
-// 👉 Ожидаемый результат:
-{
-  electronics: 2,
-  clothing: 2,
-  home: 1
-}
-
-
-const products = [
-  { name: 'Laptop', category: 'electronics' },
-  { name: 'Shirt', category: 'clothing' },
-  { name: 'Phone', category: 'electronics' },
-  { name: 'Pants', category: 'clothing' },
-  { name: 'Blender', category: 'home' }
-]
-
-const sorted = products.reduce((acc, product) => {
- if (!acc[product.category]) {
-  acc[product.category] = 0
- }
- acc[product.category]++
- return acc
-}, {}) 
-
-console.log(sorted)
-
+console.log(toObject(usersArr))
 
 
 
