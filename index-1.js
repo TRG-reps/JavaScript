@@ -1,39 +1,34 @@
 /*
-// Задание 1: "Отложенная активация пользователей"
-// Есть массив пользователей:
-const users = [
-  { name: 'Alex', isActive: false },
-  { name: 'John', isActive: false },
-  { name: 'Kate', isActive: false }
+// Задание 1: "Система уведомлений"
+// Есть массив уведомлений:
+const notifications = [
+  { id: 1, message: 'Новое сообщение', read: false },
+  { id: 2, message: 'Обновление профиля', read: false }
 ];
 
-// Создай функцию `activateUsers(arr)`:
-// - для каждого пользователя установи разную задержку (например: index * 1000)
-// - через setTimeout меняй isActive на true
-// - при активации выводи: "Пользователь Alex активирован"
-// - после всех активаций выведи весь массив
+// Создай функцию `startNotifications(arr)`:
+// - каждую секунду показывай одно уведомление (по очереди)
+// - после показа помечай его как read = true
+// - когда все уведомления показаны — останови интервал
+// - в конце выведи обновлённый массив
 */
 
+const notifications = [
+  { id: 1, message: "Новое сообщение", read: false },
+  { id: 2, message: "Обновление профиля", read: false },
+];
 
-const users = [
-  { name: 'Alex', isActive: false },
-  { name: 'John', isActive: false },
-  { name: 'Kate', isActive: false }
-]
+const startNotifications = (arr) => {
+  let index = 0;
+  let interval = setInterval(() => {
+    console.log(arr[index].message);
+    arr[index].read = true;
+    index++;
+    if (index === arr.length) {
+      clearInterval(interval);
+      console.log(arr);
+    }
+  }, 1000);
+};
 
-
-const activateUsers = (arr) => {
-arr.forEach ((element, index) => {
-  setTimeout(() => {
-    element.isActive = true;
-    console.log(`Пользователь ${element.name} активирован`)
-  }, index * 1000)
-  
-})
-setTimeout(() => {
-  console.log(arr)
-}, arr.length * 1000) 
-}
-
-activateUsers(users)
-
+startNotifications(notifications);

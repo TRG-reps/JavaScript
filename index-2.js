@@ -1,27 +1,39 @@
 /*
-Создай функцию startCounter().
+// Задание 2: "Авто-сохранение формы"
 
-Требования:
+// Есть объект:
+const form = {
+  name: 'Alex',
+  email: 'test@mail.com',
+  isSaved: false
+};
 
-Каждую секунду выводи в консоль:
-1
-2
-3
-4
-5
-После вывода 5 останови интервал через clearInterval().
+// Создай функцию `autoSave(form)`:
+// - каждые 3 секунды:
+//   → меняй isSaved на true
+//   → выводи "Форма сохранена"
+// - если поле уже true — не дублируй вывод
+// - останови через 2 сохранения
 */
 
+const form = {
+  name: "Alex",
+  email: "test@mail.com",
+  isSaved: false,
+};
 
-const startCounter = () => {
-    let seconds = 1
-    let timer = setInterval(() => {
-        console.log(seconds)
-        seconds++
-        if (seconds > 5) {
-            clearInterval(timer)
-        }
-    }, 1000)
-}
+const autoSave = (form) => {
+  let cycle = 0;
+  let interval = setInterval(() => {
+    if (!form.isSaved) {
+      form.isSaved = true;
+      console.log("Форма сохранена", form);
+    }
+    cycle++;
+    if (cycle === 2) {
+      clearInterval(interval);
+    }
+  }, 3000);
+};
 
-startCounter()
+autoSave(form);

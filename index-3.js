@@ -1,37 +1,34 @@
 /*
-// Задание 3: "Проверка неактивных пользователей"
+// Задание 3: "Имитация загрузки файлов"
 // Есть массив:
-const usersLastSeen = [
-  { name: 'Alex', lastSeen: 2 },
-  { name: 'John', lastSeen: 10 },
-  { name: 'Kate', lastSeen: 5 }
+const files = [
+  { name: 'file1', progress: 0 },
+  { name: 'file2', progress: 0 }
 ];
 
-// Создай функцию `markInactive(arr)`:
-// - через setTimeout (например 2 секунды)
-// - пройдись по массиву и добавь поле isInactive:
-//   true если lastSeen > 5
-// - выведи обновлённый массив
+// Создай функцию `uploadFiles(arr)`:
+// - каждые 1 секунду увеличивай progress каждого файла на 25
+// - выводи прогресс
+// - когда все файлы достигли 100 — останови процесс
 */
 
-const usersLastSeen = [
-    { name: 'Alex', lastSeen: 2 },
-    { name: 'John', lastSeen: 10 },
-    { name: 'Kate', lastSeen: 5 }
-  ]
+const files = [
+  { name: "file1", progress: 0 },
+  { name: "file2", progress: 0 },
+];
 
-  const markInactive = (arr) => {
-    setTimeout(() => {
-        arr.forEach((user) => {
-            let nonActive = user.lastSeen > 5
-            user.isInactive = nonActive 
-        } )
-    console.log(arr)
-    }, 2000)
-  }
+const uploadFiles = (arr) => {
+  let upload;
+  let interval = setInterval(() => {
+    arr.forEach((file) => {
+      upload = file.progress += 25;
+      console.log(file.progress);
+    });
 
-  markInactive(usersLastSeen)
+    if (arr.every((file) => file.progress === 100)) {
+      clearInterval(interval);
+    }
+  }, 1000);
+};
 
-
-
-
+uploadFiles(files);

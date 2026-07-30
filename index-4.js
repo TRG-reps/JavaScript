@@ -1,61 +1,34 @@
 /*
-// Задание 4: "Живое обновление корзины"
-// Есть массив товаров:
-const cart = [
-  { title: 'Phone', price: 500 },
-  { title: 'Case', price: 50 }
+// Задание 4: "Отложенная фильтрация данных"
+// Есть массив:
+const usersData = [
+  { name: 'Alex', age: 20 },
+  { name: 'John', age: 17 },
+  { name: 'Kate', age: 25 }
 ];
 
-// Создай функцию `watchCart(arr)`:
-// - каждые 2 секунды (setInterval):
-//   → добавляй случайный товар в массив
-//   → пересчитывай общую сумму (через функцию)
-//   → выводи: "Товар добавлен, сумма: X"
-// - останови процесс после 3 добавлений
+// Создай функцию `delayedFilter(arr)`:
+// - через setTimeout:
+//   → отфильтруй пользователей старше 18
+//   → добавь им поле isAdult = true
+// - выведи результат
 */
 
-const cart = [
-    { title: 'Phone', price: 500 },
-    { title: 'Case', price: 50 }
-  ];
+const usersData = [
+  { name: "Alex", age: 20 },
+  { name: "John", age: 17 },
+  { name: "Kate", age: 25 },
+];
 
-  const products = [
-    { title: 'Laptop', price: 1200 },
-    { title: 'Mouse', price: 30 },
-    { title: 'Keyboard', price: 80 },
-    { title: 'Headphones', price: 150 }
-  ];
+const delayedFilter = (arr) => {
+  setTimeout(() => {
+    const adults = arr.filter((user) => user.age >= 18);
+    let filter = adults.map((adult) => ({
+      ...adult,
+      isAdult: true,
+    }));
+    console.log(filter);
+  }, 2000);
+};
 
-
-
-  
-function totalPrice (arr) {
-    let total = 0
-    arr.forEach((prod) => {
-        total += prod.price
-    })
-    return total
-  }
-
-  
-  
-    const watchCart = (arr) => {
-    let addings = 0
-    let interval = setInterval(() => {
-    let randomProd = products[Math.floor(Math.random() * products.length)]
-    arr.push(randomProd)
-    addings++
-    console.log(`${randomProd.title} добавлен, сумма: ${totalPrice(arr)}`)
-    if (addings === 3) {
-        clearInterval(interval)
-    }
-    }, 2000)
-    
-    
-    }
-   
-    watchCart(cart)
-
-    
-    
- 
+delayedFilter(usersData);
