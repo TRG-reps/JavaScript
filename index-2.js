@@ -1,39 +1,60 @@
 /*
-// Задание 2: "Авто-сохранение формы"
+// Задание 2: "Ротация статусов задач"
+// Есть массив:
+const tasks = [
+  { title: 'Task 1', status: 'new' },
+  { title: 'Task 2', status: 'new' }
+];
 
-// Есть объект:
-const form = {
-  name: 'Alex',
-  email: 'test@mail.com',
-  isSaved: false
-};
+// Возможные статусы: ['new', 'inProgress', 'done']
 
-// Создай функцию `autoSave(form)`:
-// - каждые 3 секунды:
-//   → меняй isSaved на true
-//   → выводи "Форма сохранена"
-// - если поле уже true — не дублируй вывод
-// - останови через 2 сохранения
+// Создай функцию `rotateStatuses(arr)`:
+// - каждые 2 секунды:
+//   → меняй статус каждой задачи по кругу (new → inProgress → done → new)
+//   → выводи обновлённый массив
+// - останови после 3 полных циклов
 */
 
-const form = {
-  name: "Alex",
-  email: "test@mail.com",
-  isSaved: false,
-};
 
-const autoSave = (form) => {
-  let cycle = 0;
-  let interval = setInterval(() => {
-    if (!form.isSaved) {
-      form.isSaved = true;
-      console.log("Форма сохранена", form);
-    }
-    cycle++;
-    if (cycle === 2) {
-      clearInterval(interval);
-    }
-  }, 3000);
-};
 
-autoSave(form);
+const tasks = [
+    { title: 'Task 1', status: 'new' },
+    { title: 'Task 2', status: 'new' }
+  ];
+
+let stats = ['new', 'inProgress', 'done']
+
+
+
+ const rotateStatuses = (arr) => {
+    
+    let index = 0
+    let cycle = 0
+    
+    let interval = setInterval(() => {
+        
+    arr.forEach((task) => {
+     task.status = stats[index]
+     console.log(task.status)
+     })
+     
+     index++
+    if (index === stats.length) {
+        index = 0
+     cycle++}
+
+    if (cycle === 3) {
+        clearInterval(interval)
+        
+    }
+
+    
+
+    
+     }, 2000)
+
+     
+
+ }
+
+ rotateStatuses(tasks)

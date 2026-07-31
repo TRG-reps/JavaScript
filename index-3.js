@@ -1,34 +1,41 @@
 /*
-// Задание 3: "Имитация загрузки файлов"
-// Есть массив:
-const files = [
-  { name: 'file1', progress: 0 },
-  { name: 'file2', progress: 0 }
+// Задание 3: "Имитация лайков"
+// Есть массив постов:
+const posts = [
+  { id: 1, likes: 0 },
+  { id: 2, likes: 0 }
 ];
 
-// Создай функцию `uploadFiles(arr)`:
-// - каждые 1 секунду увеличивай progress каждого файла на 25
-// - выводи прогресс
-// - когда все файлы достигли 100 — останови процесс
+// Создай функцию `startLikes(arr)`:
+// - каждые 1 секунду:
+//   → случайному посту увеличивай likes на 1
+//   → выводи массив
+// - если какой-то пост достиг 5 лайков:
+//   → добавь ему поле popular = true
+//   → останови процесс
 */
 
-const files = [
-  { name: "file1", progress: 0 },
-  { name: "file2", progress: 0 },
-];
+const posts = [
+    { id: 1, likes: 0 },
+    { id: 2, likes: 0 }
+  ];
 
-const uploadFiles = (arr) => {
-  let upload;
-  let interval = setInterval(() => {
-    arr.forEach((file) => {
-      upload = file.progress += 25;
-      console.log(file.progress);
-    });
 
-    if (arr.every((file) => file.progress === 100)) {
-      clearInterval(interval);
-    }
-  }, 1000);
-};
+  const startLikes = (arr) => {
+    
+    
 
-uploadFiles(files);
+    let interval = setInterval(() => {
+        let randomPost = arr[Math.floor(Math.random() * arr.length)]
+        randomPost.likes += 1
+      console.log(`ID: ${randomPost.id} has ${randomPost.likes} like(s)`)
+      let popularPost = arr.find((post) => post.likes === 5 )
+      if (popularPost) {
+        clearInterval(interval)
+        popularPost.popular = true
+        console.log(popularPost)
+      }
+    }, 1000)
+  }
+
+  startLikes(posts)

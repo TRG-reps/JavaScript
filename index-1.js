@@ -1,34 +1,42 @@
 /*
-// Задание 1: "Система уведомлений"
-// Есть массив уведомлений:
-const notifications = [
-  { id: 1, message: 'Новое сообщение', read: false },
-  { id: 2, message: 'Обновление профиля', read: false }
+// Задание 1: "Постепенное удаление пользователей"
+// Есть массив:
+const users = [
+  { name: 'Alex' },
+  { name: 'John' },
+  { name: 'Kate' },
+  { name: 'Mike' }
 ];
 
-// Создай функцию `startNotifications(arr)`:
-// - каждую секунду показывай одно уведомление (по очереди)
-// - после показа помечай его как read = true
-// - когда все уведомления показаны — останови интервал
-// - в конце выведи обновлённый массив
+// Создай функцию `removeUsers(arr)`:
+// - каждые 1 секунду удаляй одного пользователя (с конца массива)
+// - выводи: "Удалён пользователь: Mike"
+// - когда массив станет пустым — останови процесс
+// - в конце выведи пус
 */
 
-const notifications = [
-  { id: 1, message: "Новое сообщение", read: false },
-  { id: 2, message: "Обновление профиля", read: false },
-];
 
-const startNotifications = (arr) => {
-  let index = 0;
+const users = [
+  { name: 'Alex' },
+  { name: 'John' },
+  { name: 'Kate' },
+  { name: 'Mike' }
+]
+
+
+const removeUsers = (arr) => {
   let interval = setInterval(() => {
-    console.log(arr[index].message);
-    arr[index].read = true;
-    index++;
-    if (index === arr.length) {
-      clearInterval(interval);
-      console.log(arr);
-    }
-  }, 1000);
-};
+  let delUser = arr.pop()
+  console.log(`Удален пользователь: ${delUser.name}`)
+  if (arr.length === 0) {
+    clearInterval(interval)
+    console.log(arr)
+  }
+  
+  }, 1000)
+  
+}
 
-startNotifications(notifications);
+
+removeUsers(users)
+
