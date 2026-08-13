@@ -1,41 +1,27 @@
 /*
-// Задание 3: "Имитация лайков"
-// Есть массив постов:
-const posts = [
-  { id: 1, likes: 0 },
-  { id: 2, likes: 0 }
-];
+// Задание 3: "Имитация загрузки пользователя"
+// Создай функцию `loadUser()`:
+// - возвращает Promise
+// - через 1.5 секунды возвращает объект:
+//   { name: 'Alex', age: 20 }
+// Выведи имя пользователя после получения
 
-// Создай функцию `startLikes(arr)`:
-// - каждые 1 секунду:
-//   → случайному посту увеличивай likes на 1
-//   → выводи массив
-// - если какой-то пост достиг 5 лайков:
-//   → добавь ему поле popular = true
-//   → останови процесс
 */
 
-const posts = [
-    { id: 1, likes: 0 },
-    { id: 2, likes: 0 }
-  ];
 
+function loadUser() {
 
-  const startLikes = (arr) => {
-    
-    
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+         resolve({ name: 'Alex', age: 20 })
+         
+        }, 1500)
+    })
 
-    let interval = setInterval(() => {
-        let randomPost = arr[Math.floor(Math.random() * arr.length)]
-        randomPost.likes += 1
-      console.log(`ID: ${randomPost.id} has ${randomPost.likes} like(s)`)
-      let popularPost = arr.find((post) => post.likes === 5 )
-      if (popularPost) {
-        clearInterval(interval)
-        popularPost.popular = true
-        console.log(popularPost)
-      }
-    }, 1000)
-  }
+   
+}
 
-  startLikes(posts)
+loadUser()
+.then((user) => {
+    console.log(user.name)
+})

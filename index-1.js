@@ -1,42 +1,24 @@
 /*
-// Задание 1: "Постепенное удаление пользователей"
-// Есть массив:
-const users = [
-  { name: 'Alex' },
-  { name: 'John' },
-  { name: 'Kate' },
-  { name: 'Mike' }
-];
-
-// Создай функцию `removeUsers(arr)`:
-// - каждые 1 секунду удаляй одного пользователя (с конца массива)
-// - выводи: "Удалён пользователь: Mike"
-// - когда массив станет пустым — останови процесс
-// - в конце выведи пус
+// Задание 1: "Простой промис"
+// Создай функцию `getMessage()`:
+// - возвращает Promise
+// - через 1 секунду resolve со строкой: "Привет из промиса"
+// Сохрани результат в переменную и выведи через .then()
 */
 
 
-const users = [
-  { name: 'Alex' },
-  { name: 'John' },
-  { name: 'Kate' },
-  { name: 'Mike' }
-]
-
-
-const removeUsers = (arr) => {
-  let interval = setInterval(() => {
-  let delUser = arr.pop()
-  console.log(`Удален пользователь: ${delUser.name}`)
-  if (arr.length === 0) {
-    clearInterval(interval)
-    console.log(arr)
-  }
-  
-  }, 1000)
-  
+function getMessage() {
+  return new Promise ((resolve) => {
+    setTimeout(() => {
+     resolve('Привет из промиса')
+  },1000)
+  })
 }
 
 
-removeUsers(users)
+const result = getMessage()
+
+result.then((info)=> {
+console.log (info)
+})
 
