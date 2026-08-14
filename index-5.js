@@ -1,23 +1,37 @@
 /*
-// Задание 5: "Цепочка промисов"
-// Создай функцию `start()`:
-// - возвращает Promise с числом 2
-// Построй цепочку:
-// - сначала умножь на 3
-// - потом прибавь 4
-// - выведи итог
+// Задание 5: "Два вызова подряд"
+// Создай функции:
+// 1. getA() → Promise с числом 2
+// 2. getB() → Promise с числом 3
+
+// Создай async функцию:
+// - вызови обе функции через await
+// - сложи результаты
+// - выведи сумму
 */
 
 
 
-function start () {
-    return Promise.resolve(2)
+function getA() {
+    return new Promise ((resolve) => {
+        resolve(2)
+    }) 
 }
 
-start()
-.then((num) => {
-    return num * 3
-})
-.then((num) => {
-    console.log( num + 4 )
-})
+function getB() {
+    return new Promise((resolve) => {
+        resolve(3)
+    })
+}
+
+
+async function addFunctions() {
+    const A = await getA()
+    const B = await getB()
+
+    console.log(A + B)
+
+    
+}
+
+addFunctions()

@@ -1,27 +1,29 @@
 /*
-// Задание 3: "Имитация загрузки пользователя"
-// Создай функцию `loadUser()`:
+// Задание 3: "Получение пользователя"
+// Создай функцию `getUser()`:
 // - возвращает Promise
-// - через 1.5 секунды возвращает объект:
+// - возвращает объект:
 //   { name: 'Alex', age: 20 }
-// Выведи имя пользователя после получения
+
+// Создай async функцию:
+// - получи пользователя через await
+// - выведи его имя
+
 
 */
 
-
-function loadUser() {
-
-    return new Promise((resolve,reject) => {
-        setTimeout(() => {
-         resolve({ name: 'Alex', age: 20 })
-         
-        }, 1500)
-    })
-
-   
+function getUser() {
+    return new Promise ((resolve) => {
+        resolve({ name: 'Alex', age: 20 })
+    }) 
 }
 
-loadUser()
-.then((user) => {
+async function showUser() {
+    const user = await getUser()
     console.log(user.name)
-})
+    
+}
+
+
+showUser()
+

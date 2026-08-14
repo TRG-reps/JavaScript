@@ -1,24 +1,25 @@
 /*
-// Задание 1: "Простой промис"
+// Задание 1: "Простая задержка"
 // Создай функцию `getMessage()`:
 // - возвращает Promise
-// - через 1 секунду resolve со строкой: "Привет из промиса"
-// Сохрани результат в переменную и выведи через .then()
+// - через 1 секунду возвращает строку: "Привет"
+
+// Создай async функцию:
+// - вызови getMessage() через await
+// - выведи результат в консоль
 */
 
 
 function getMessage() {
   return new Promise ((resolve) => {
-    setTimeout(() => {
-     resolve('Привет из промиса')
-  },1000)
+setTimeout(() => {
+  resolve('Привет')
+}, 1000)
   })
 }
 
+async function showMessage () {
+  console.log(await getMessage())
+}
 
-const result = getMessage()
-
-result.then((info)=> {
-console.log (info)
-})
-
+showMessage()
