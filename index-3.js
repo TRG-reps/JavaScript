@@ -1,29 +1,30 @@
 /*
-// Задание 3: "Получение пользователя"
-// Создай функцию `getUser()`:
-// - возвращает Promise
-// - возвращает объект:
-//   { name: 'Alex', age: 20 }
+// Задание 3: "Найти пользователя"
+// URL:
+// https://jsonplaceholder.typicode.com/users
 
-// Создай async функцию:
-// - получи пользователя через await
-// - выведи его имя
+// Создай async функцию `findUserById(id)`:
+// - получи всех пользователей
+// - найди пользователя по id
+// - выведи его имя и email
 
 
 */
 
-function getUser() {
-    return new Promise ((resolve) => {
-        resolve({ name: 'Alex', age: 20 })
-    }) 
+async function findUserById(id) {
+
+const data = await fetch('https://jsonplaceholder.typicode.com/users')
+
+const users = await data.json()
+
+const user =  users.find((user) => {
+    return user.id === id
+})
+console.log(user.name, user.email)
+
+
+
 }
 
-async function showUser() {
-    const user = await getUser()
-    console.log(user.name)
-    
-}
-
-
-showUser()
+findUserById(2)
 

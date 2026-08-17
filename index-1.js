@@ -1,25 +1,23 @@
 /*
-// Задание 1: "Простая задержка"
-// Создай функцию `getMessage()`:
-// - возвращает Promise
-// - через 1 секунду возвращает строку: "Привет"
+// Задание 1: "Получить список пользователей"
+// Используй fetch:
+// https://jsonplaceholder.typicode.com/users
 
 // Создай async функцию:
-// - вызови getMessage() через await
-// - выведи результат в консоль
+// - получи данные
+// - преобразуй в JSON
+// - выведи массив пользователей в консоль
+
 */
 
 
-function getMessage() {
-  return new Promise ((resolve) => {
-setTimeout(() => {
-  resolve('Привет')
-}, 1000)
-  })
+async function getUsers() {
+
+const data =  await fetch ('https://jsonplaceholder.typicode.com/users')
+
+const users = await data.json()
+
+console.log(users)
 }
 
-async function showMessage () {
-  console.log(await getMessage())
-}
-
-showMessage()
+getUsers()
