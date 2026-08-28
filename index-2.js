@@ -15,46 +15,28 @@ const tasks = [
 // - останови после 3 полных циклов
 */
 
-
-
 const tasks = [
-    { title: 'Task 1', status: 'new' },
-    { title: 'Task 2', status: 'new' }
-  ];
+  { title: "Task 1", status: "new" },
+  { title: "Task 2", status: "done" },
+];
 
-let stats = ['new', 'inProgress', 'done']
+const stats = ["new", "inProgress", "done"];
 
-
-
- const rotateStatuses = (arr) => {
-    
-    let index = 0
-    let cycle = 0
-    
-    let interval = setInterval(() => {
-        
+const rotateStatuses = (arr) => {
+  let cycle = 0;
+  let interval = setInterval(() => {
     arr.forEach((task) => {
-     task.status = stats[index]
-     console.log(task.status)
-     })
-     
-     index++
-    if (index === stats.length) {
-        index = 0
-     cycle++}
+      let index = stats.indexOf(task.status);
+      task.status = stats[(index + 1) % stats.length];
+      
+    });
+    console.log(arr)
+    cycle++;
 
     if (cycle === 3) {
-        clearInterval(interval)
-        
+      clearInterval(interval);
     }
+  }, 2000);
+};
 
-    
-
-    
-     }, 2000)
-
-     
-
- }
-
- rotateStatuses(tasks)
+rotateStatuses(tasks);
