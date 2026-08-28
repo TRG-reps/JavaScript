@@ -28,12 +28,16 @@ const autoSave = (form) => {
     if (!form.isSaved) {
       form.isSaved = true;
       console.log("Форма сохранена", form);
+      cycle++;
+      
       
     }
-    form.isSaved = false
-    cycle++;
+    
+    
     if (cycle === 2) {
       clearInterval(interval);
+    } else {
+      form.isSaved = false
     }
   }, 3000);
 };
