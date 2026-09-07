@@ -1,23 +1,35 @@
-/*
-// Задание 1: "Получить список пользователей"
-// Используй fetch:
+// Задание 1: "Топ пользователи по количеству постов"
+// URL:
 // https://jsonplaceholder.typicode.com/users
+// https://jsonplaceholder.typicode.com/posts
 
 // Создай async функцию:
-// - получи данные
-// - преобразуй в JSON
-// - выведи массив пользователей в консоль
+// - получи пользователей и посты
+// - для каждого пользователя посчитай количество его постов
+// - отсортируй пользователей по убыванию postsCount
+// - верни топ-3 пользователей
+// - выведи результат
 
-*/
+async function getTop() {
 
+    const dataUsers = await fetch('https://jsonplaceholder.typicode.com/users')
+    const dataPosts = await fetch ('https://jsonplaceholder.typicode.com/posts')
 
-async function getUsers() {
+    const users = await dataUsers.json()
+    const posts = await dataPosts.json()
 
-const data =  await fetch ('https://jsonplaceholder.typicode.com/users')
+    const postNumber = users.map((user) => {
+        const userPosts = posts.filter((post) => post.userId === user.id)
 
-const users = await data.json()
+        return {
+            ...user,
+            postsCount: userPosts.length
+        }
+    })
 
-console.log(users)
+    const sorted = postNumber.sort((a, b) => b.postsCount - a.postsCount)
+
+    console.log(sorted.slice(0, 3))
 }
 
-getUsers()
+getTop()

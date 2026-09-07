@@ -1,41 +1,48 @@
-/*
-// Задание 6: "Комбинация пользователей и постов"
+// Задание 6: "Поиск активного пользователя"
 // URL:
 // https://jsonplaceholder.typicode.com/users
-// https://jsonplaceholder.typicode.com/posts
+// https://jsonplaceholder.typicode.com/comments
 
 // Создай async функцию:
-// - получи пользователей
-// - получи посты
-// - каждому пользователю добавь поле postsCount (кол-во его постов)
-// - выведи обновлённый массив
-*/
+// - получи пользователей и комментарии
+// - посчитай, сколько комментариев оставил каждый пользователь (по email)
+// - найди пользователя с максимальным количеством комментариев
+// - выведи его имя и количество комментариев
 
 
-async function combUsers() {
 
-    const usersData = await fetch ('https://jsonplaceholder.typicode.com/users')
-    const postsData = await fetch ('https://jsonplaceholder.typicode.com/posts')
+async function activeUser() {
+  
+   const userData = await fetch ('https://jsonplaceholder.typicode.com/users')
+   const commentsData = await fetch ('https://jsonplaceholder.typicode.com/comments')
 
-    const users = await usersData.json()
-    const posts = await postsData.json()
+   const users = await userData.json()
+   const comments = await commentsData.json()
 
    
-   const result = users.map((user) => {
-
-    const usersPosts = posts.filter ((post) => {
-    return post.userId === user.id
+   let result = users.map((user) => {
+      let userComm = comments.filter(comm => comm.email === user.email)
+     
+       return {
+         ...user,
+         commentsCount:userComm.length
+       }
    })
 
-   return {
-    ...user,
-    postCount: usersPosts.length
-   }
+    let active = result.reduce ((acc, user) => {
 
-})
+     if (acc.commentsCount < user.commentsCount) {
+      return user
+     } else { return acc}
 
-   console.log (result)
+    }, result[0])
+
+    console.log(active.name, active.commentsCount)
+    return result
+ 
+
+
 
 }
 
-combUsers()
+activeUser()

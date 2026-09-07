@@ -1,30 +1,39 @@
-/*
-// Задание 3: "Найти пользователя"
+// Задание 3: "Обогащение комментариев"
 // URL:
-// https://jsonplaceholder.typicode.com/users
+// https://jsonplaceholder.typicode.com/comments
+// https://jsonplaceholder.typicode.com/posts
 
-// Создай async функцию `findUserById(id)`:
-// - получи всех пользователей
-// - найди пользователя по id
-// - выведи его имя и email
-
-
-*/
-
-async function findUserById(id) {
-
-const data = await fetch('https://jsonplaceholder.typicode.com/users')
-
-const users = await data.json()
-
-const user =  users.find((user) => {
-    return user.id === id
-})
-console.log(user.name, user.email)
+// Создай async функцию:
+// - получи комментарии и посты
+// - добавь к каждому комментарию поле postTitle (название поста)
+// - верни новый массив комментариев
+// - выведи результат
 
 
+
+async function addComment() {
+
+ const dataComm = await fetch('https://jsonplaceholder.typicode.com/comments')
+ const comms = await dataComm.json()
+ 
+ const dataPosts = await fetch('https://jsonplaceholder.typicode.com/posts')
+ const posts = await dataPosts.json()
+
+ console.log(comms, posts)
+
+ let result = comms.map((comm) => {
+  const postWithCom = posts.find((post) => post.id === comm.postId )
+  
+  return {
+    ...comm,
+    postTitle: postWithCom.title
+  }
+ })
+
+ 
+console.log(result)
+return result
 
 }
 
-findUserById(2)
-
+addComment()
